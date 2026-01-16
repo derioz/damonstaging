@@ -7,7 +7,17 @@ export enum StagingStyle {
   BOHEMIAN = 'Bohemian',
   MINIMALIST = 'Minimalist',
   EMPTY = 'Empty Room (Declutter)',
-  LUXURY = 'Luxury/Glam'
+  LUXURY = 'Luxury/Glam',
+  MID_CENTURY_MODERN = 'Mid-Century Modern',
+  TRANSITIONAL = 'Transitional',
+  COASTAL = 'Coastal',
+  FARMHOUSE = 'Modern Farmhouse',
+  CONTEMPORARY = 'Contemporary',
+  TRADITIONAL = 'Traditional',
+  ZEN = 'Zen/Japandi',
+  BIOPHILIC = 'Biophilic',
+  COTTAGE_CORE = 'Cottage Core',
+  ART_DECO = 'Art Deco'
 }
 
 export interface StagedImage {

@@ -135,6 +135,33 @@ const App: React.FC = () => {
     }
   };
 
+  const handleDelete = (e: React.MouseEvent, imageId: string) => {
+    e.stopPropagation();
+    if (confirm("Delete this image and all its staged versions?")) {
+      setState(prev => {
+        const newUploaded = prev.uploadedImages.filter(img => img.id !== imageId);
+        const newStaged = prev.stagedImages.filter(img => img.originalImageId !== imageId);
+
+        // Determine new active image if we deleted the current one
+        let newActiveId = prev.activeImageId;
+        if (prev.activeImageId === imageId) {
+          newActiveId = newUploaded.length > 0 ? newUploaded[newUploaded.length - 1].id : null;
+        }
+
+        return {
+          ...prev,
+          uploadedImages: newUploaded,
+          stagedImages: newStaged,
+          activeImageId: newActiveId
+        };
+      });
+      // If we deleted the active image, reset view to original of the new active one (or null)
+      if (state.activeImageId === imageId) {
+        setCurrentViewId('original');
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 text-slate-200">
       {/* Navbar */}
@@ -209,8 +236,6 @@ const App: React.FC = () => {
                         if (e.target.files && e.target.files.length > 0) {
                           const files: string[] = [];
                           const fileList = Array.from(e.target.files);
-                          // Reusing the upload logic slightly differently here for simplicity or exact same logic if abstracted
-                          // For now, simple manual read for the add-more button
                           let processed = 0;
                           fileList.forEach(file => {
                             const reader = new FileReader();
@@ -232,9 +257,18 @@ const App: React.FC = () => {
                     <div
                       key={img.id}
                       onClick={() => { setState(prev => ({ ...prev, activeImageId: img.id })); setCurrentViewId('original'); }}
-                      className={`aspect-square rounded-xl overflow-hidden cursor-pointer border-2 transition-all ${state.activeImageId === img.id ? 'border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.3)]' : 'border-transparent opacity-50 hover:opacity-100'}`}
+                      className={`aspect-square rounded-xl overflow-hidden cursor-pointer border-2 transition-all relative group ${state.activeImageId === img.id ? 'border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.3)]' : 'border-transparent opacity-50 hover:opacity-100'}`}
                     >
                       <img src={img.url} className="w-full h-full object-cover" alt="Space" />
+
+                      {/* Delete Overlay */}
+                      <button
+                        onClick={(e) => handleDelete(e, img.id)}
+                        className="absolute inset-0 bg-red-500/80 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity flex"
+                        title="Delete Image"
+                      >
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -357,9 +391,13 @@ const App: React.FC = () => {
                       </div>
                       <div className="flex gap-3 w-full md:w-auto">
                         <Button variant="outline" onClick={() => setCurrentViewId('original')} className="flex-1 md:flex-none">View Original</Button>
+                        <Button variant="outline" onClick={handleStage} className="flex-1 md:flex-none">
+                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                          Regenerate
+                        </Button>
                         <Button onClick={handleDownload} className="flex-1 md:flex-none px-8">
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                          Download PNG
+                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                          Download
                         </Button>
                       </div>
                     </div>
