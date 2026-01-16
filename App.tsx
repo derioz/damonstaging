@@ -14,6 +14,7 @@ const App: React.FC = () => {
     stagedImages: [],
     isProcessing: false,
     selectedStyle: StagingStyle.MODERN,
+    selectedRoomType: 'LIVING_ROOM',
     error: null,
   });
 
@@ -80,7 +81,7 @@ const App: React.FC = () => {
     setState(prev => ({ ...prev, isProcessing: true, error: null }));
 
     try {
-      const result = await stageRoom(activeImage.url, state.selectedStyle);
+      const result = await stageRoom(activeImage.url, state.selectedStyle, state.selectedRoomType);
 
       const newStagedImage: StagedImage = {
         id: Math.random().toString(36).substring(7),
@@ -129,6 +130,7 @@ const App: React.FC = () => {
         stagedImages: [],
         isProcessing: false,
         selectedStyle: StagingStyle.MODERN,
+        selectedRoomType: 'LIVING_ROOM',
         error: null,
       });
       setCurrentViewId('original');
@@ -274,11 +276,33 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              <div className="glass p-8 rounded-3xl space-y-8">
+              <div className="glass p-6 rounded-3xl space-y-6">
+                {/* Room Type Selector */}
                 <div>
-                  <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-sm uppercase tracking-widest text-indigo-400 font-black">1. Pick a Style</h3>
-                    <span className="text-[10px] text-slate-500 font-bold">Staging Active Room</span>
+                  <div className="flex justify-between items-center mb-3">
+                    <h3 className="text-[10px] uppercase tracking-widest text-slate-500 font-black">Room Type</h3>
+                  </div>
+                  <select
+                    value={state.selectedRoomType || 'LIVING_ROOM'}
+                    onChange={(e) => setState(prev => ({ ...prev, selectedRoomType: e.target.value as any }))}
+                    disabled={state.isProcessing}
+                    className="w-full bg-slate-900 border-2 border-slate-800 rounded-xl px-4 py-3 text-white font-medium focus:border-indigo-500 focus:outline-none transition-colors disabled:opacity-50"
+                  >
+                    <option value="LIVING_ROOM">Living Room</option>
+                    <option value="BEDROOM">Bedroom</option>
+                    <option value="KITCHEN">Kitchen</option>
+                    <option value="DINING_ROOM">Dining Room</option>
+                    <option value="OFFICE">Home Office</option>
+                    <option value="BATHROOM">Bathroom</option>
+                    <option value="OUTDOOR">Outdoor / Patio</option>
+                  </select>
+                </div>
+
+                {/* Style Picker */}
+                <div>
+                  <div className="flex justify-between items-center mb-3">
+                    <h3 className="text-[10px] uppercase tracking-widest text-indigo-400 font-black">Staging Style</h3>
+                    <span className="text-[9px] text-slate-600 font-bold">{Object.keys(StagingStyle).length} styles</span>
                   </div>
                   <StylePicker
                     selected={state.selectedStyle}
@@ -289,15 +313,16 @@ const App: React.FC = () => {
 
                 <Button
                   onClick={handleStage}
-                  className="w-full py-5 text-xl rounded-2xl"
+                  className="w-full py-4 text-lg rounded-2xl font-bold"
                   isLoading={state.isProcessing}
                   variant="primary"
                 >
-                  Generate {state.selectedStyle} View
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                  Generate Staging
                 </Button>
 
                 {state.error && (
-                  <div className="p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl text-sm font-medium">
+                  <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl text-xs font-medium">
                     {state.error}
                   </div>
                 )}

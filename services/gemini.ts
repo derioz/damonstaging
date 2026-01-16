@@ -3,9 +3,20 @@ import { GoogleGenAI } from "@google/genai";
 import { StagingStyle } from "../types";
 import { STYLE_CONFIGS } from "../constants";
 
+const ROOM_TYPE_LABELS: Record<string, string> = {
+  LIVING_ROOM: 'a living room',
+  BEDROOM: 'a bedroom',
+  KITCHEN: 'a kitchen',
+  DINING_ROOM: 'a dining room',
+  OFFICE: 'a home office',
+  BATHROOM: 'a bathroom',
+  OUTDOOR: 'an outdoor patio or deck'
+};
+
 export const stageRoom = async (
   originalImageBase64: string,
-  style: StagingStyle
+  style: StagingStyle,
+  roomType: string = 'LIVING_ROOM'
 ): Promise<{ url: string; description: string }> => {
   const apiKey = process.env.API_KEY;
   if (!apiKey || apiKey === "PLACEHOLDER_API_KEY") {
@@ -16,6 +27,7 @@ export const stageRoom = async (
 
   const base64Data = originalImageBase64.split(',')[1] || originalImageBase64;
   const styleConfig = STYLE_CONFIGS[style];
+  const roomLabel = ROOM_TYPE_LABELS[roomType] || 'a room';
 
   try {
     const response = await ai.models.generateContent({
@@ -29,7 +41,7 @@ export const stageRoom = async (
             },
           },
           {
-            text: `Act as a professional real estate staging expert. ${styleConfig.prompt}. 
+            text: `Act as a professional real estate staging expert. This image is ${roomLabel}. ${styleConfig.prompt}. 
             CRITICAL: You must return TWO parts in your response:
             1. A text part containing a professional 2-sentence description of the furniture and decor choices made for this staging. 
             2. An image part containing the hyper-realistic staged room.`,

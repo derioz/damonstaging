@@ -41,5 +41,6 @@ export interface AppState {
   stagedImages: StagedImage[];
   isProcessing: boolean;
   selectedStyle: StagingStyle;
+  selectedRoomType: string;
   error: string | null;
 }
