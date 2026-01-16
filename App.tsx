@@ -142,7 +142,7 @@ const App: React.FC = () => {
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(99,102,241,0.3)] overflow-hidden">
-              <img src="/logo.png" className="w-full h-full object-cover" alt="Damon Staging Logo" />
+              <img src={`${import.meta.env.BASE_URL}logo.png`} className="w-full h-full object-cover" alt="Damon Staging Logo" />
             </div>
             <h1 className="text-xl font-bold tracking-tighter text-white uppercase">Damon Staging Tool</h1>
           </div>
