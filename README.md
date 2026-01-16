@@ -1,20 +1,29 @@
+# Damon Staging Tool
+
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  <img src="public/logo.png" alt="Damon Staging Tool Logo" width="120" height="120" style="border-radius: 20%; box-shadow: 0 0 20px rgba(99,102,241,0.3);">
+  <br/>
+  <br/>
+  
+  [![Made by Damon](https://img.shields.io/badge/Created%20by-Damon-indigo?style=for-the-badge&logo=sparkles)](https://github.com/derioz)
+  [![Gemini AI](https://img.shields.io/badge/Powered%20by-Gemini%202.5-blue?style=for-the-badge&logo=google)](https://deepmind.google/technologies/gemini/)
 </div>
 
-# Run and deploy your AI Studio app
+---
 
-This contains everything you need to run your app locally.
+## **This tool was created by Damon.**
 
-View your app in AI Studio: https://ai.studio/apps/drive/1pvaMyOpHpDfMQJB4Q_CkSLRt6f9Lo6oL
+### 🏡 Transform Listings from "For Sale" to "Sold"
 
-## Run Locally
+The **Damon Staging Tool** leverages next-generation AI to instantly virtually stage empty or cluttered rooms. Designed specifically for real estate professionals, this tool helps potential buyers visualize the full potential of a property before they even step foot inside.
 
-**Prerequisites:**  Node.js
+### 🚀 Key Features
 
+*   **✨ Instant Visualization:** Turn cold, empty shells into warm, inviting homes in seconds.
+*   **🎨 Multiple Styles:** Choose from **Modern**, **Rustic**, **Scandinavian**, **Industrial**, and more to perfectly match the property's character.
+*   **📐 Structural Integrity:** Our "Vision Engine" preserves the room's actual architecture (windows, walls, flooring) while adding photorealistic furniture and decor.
+*   **☁️ Cloud Powered:** Runs entirely in the browser with no heavy software installation required.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+
+> *"Staging isn't just decorating; it's marketing. This tool allows me to showcase a home's true potential instantly."* — Damon
