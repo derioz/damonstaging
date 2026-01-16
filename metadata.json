@@ -1,0 +1,7 @@
+{
+  "name": "StagingAI - Virtual Real Estate Staging",
+  "description": "Professional virtual staging for real estate agents. Transform empty or cluttered rooms into beautifully staged spaces in various styles using Gemini's vision-to-image capabilities.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
