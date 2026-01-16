@@ -41,10 +41,18 @@ export const stageRoom = async (
             },
           },
           {
-            text: `Act as a professional real estate staging expert. This image is ${roomLabel}. ${styleConfig.prompt}. 
-            CRITICAL: You must return TWO parts in your response:
-            1. A text part containing a professional 2-sentence description of the furniture and decor choices made for this staging. 
-            2. An image part containing the hyper-realistic staged room.`,
+            text: `Act as a professional real estate virtual staging expert. This image is ${roomLabel}. 
+
+IMPORTANT STRUCTURAL PRESERVATION RULES:
+- DO NOT modify, alter, or change: walls, ceilings, floors, doors, windows, moldings, light fixtures, outlets, vents, built-in cabinetry, or any architectural elements.
+- ONLY add or replace: furniture, rugs, artwork, decorative items, plants, and soft furnishings (pillows, throws, curtains).
+- The room's structure, paint colors, flooring material, and architectural details must remain EXACTLY as shown in the original photo.
+
+${styleConfig.prompt}
+
+CRITICAL OUTPUT REQUIREMENTS:
+1. Return a TEXT part: A professional 2-sentence description of the furniture and decor choices made.
+2. Return an IMAGE part: The hyper-realistic staged room with furniture added but structure unchanged.`,
           },
         ],
       },
