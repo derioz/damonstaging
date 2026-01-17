@@ -15,6 +15,7 @@ const App: React.FC = () => {
     isProcessing: false,
     selectedStyle: StagingStyle.MODERN,
     selectedRoomType: 'LIVING_ROOM',
+    selectedModel: 'gemini-3-pro-image-preview',
     error: null,
   });
 
@@ -81,7 +82,7 @@ const App: React.FC = () => {
     setState(prev => ({ ...prev, isProcessing: true, error: null }));
 
     try {
-      const result = await stageRoom(activeImage.url, state.selectedStyle, state.selectedRoomType);
+      const result = await stageRoom(activeImage.url, state.selectedStyle, state.selectedRoomType, state.selectedModel);
 
       const newStagedImage: StagedImage = {
         id: Math.random().toString(36).substring(7),
@@ -131,6 +132,7 @@ const App: React.FC = () => {
         isProcessing: false,
         selectedStyle: StagingStyle.MODERN,
         selectedRoomType: 'LIVING_ROOM',
+        selectedModel: 'gemini-3-pro-image-preview',
         error: null,
       });
       setCurrentViewId('original');
@@ -175,7 +177,23 @@ const App: React.FC = () => {
             </div>
             <h1 className="text-xl font-bold tracking-tighter text-white uppercase">Damon Staging Tool</h1>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
+            {/* Model Switcher */}
+            <div className="flex bg-slate-900 rounded-lg p-1 border border-slate-800">
+              <button
+                onClick={() => setState(prev => ({ ...prev, selectedModel: 'gemini-2.5-flash-image' }))}
+                className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${state.selectedModel === 'gemini-2.5-flash-image' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
+              >
+                Fast (v2.5)
+              </button>
+              <button
+                onClick={() => setState(prev => ({ ...prev, selectedModel: 'gemini-3-pro-image-preview' }))}
+                className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${state.selectedModel === 'gemini-3-pro-image-preview' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
+              >
+                Quality (v3.0)
+              </button>
+            </div>
+            <div className="h-8 w-px bg-slate-800" />
             <Button variant="ghost" onClick={reset} className="text-xs">Reset Tool</Button>
             <div className="h-8 w-px bg-slate-800" />
             <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-slate-500 font-bold">

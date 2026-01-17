@@ -16,7 +16,8 @@ const ROOM_TYPE_LABELS: Record<string, string> = {
 export const stageRoom = async (
   originalImageBase64: string,
   style: StagingStyle,
-  roomType: string = 'LIVING_ROOM'
+  roomType: string = 'LIVING_ROOM',
+  model: string = 'gemini-2.5-flash-image'
 ): Promise<{ url: string; description: string }> => {
   const apiKey = process.env.API_KEY;
   if (!apiKey || apiKey === "PLACEHOLDER_API_KEY") {
@@ -31,7 +32,7 @@ export const stageRoom = async (
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-pro-image-preview',
+      model: model,
       contents: {
         parts: [
           {

@@ -35,6 +35,8 @@ export interface UploadedImage {
   timestamp: number;
 }
 
+export type GeminiModel = 'gemini-2.5-flash-image' | 'gemini-3-pro-image-preview';
+
 export interface AppState {
   uploadedImages: UploadedImage[];
   activeImageId: string | null;
@@ -42,5 +44,6 @@ export interface AppState {
   isProcessing: boolean;
   selectedStyle: StagingStyle;
   selectedRoomType: string;
+  selectedModel: GeminiModel;
   error: string | null;
 }
