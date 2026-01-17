@@ -3,13 +3,13 @@ import { StagingStyle } from "../types";
 import { STYLE_CONFIGS } from "../constants";
 
 // Firebase Cloud Function URL
-const FUNCTION_URL = "https://us-central1-damonstaging.cloudfunctions.net/stageRoom";
+const FUNCTION_URL = "https://stageroom-ukxalljfxa-uc.a.run.app";
 
 export const stageRoom = async (
   originalImageBase64: string,
   style: StagingStyle,
   roomType: string = 'LIVING_ROOM',
-  model: string = 'gemini-2.5-flash-image'
+  model: string = 'gemini-2.0-flash-exp'
 ): Promise<{ url: string; description: string }> => {
   try {
     const response = await fetch(FUNCTION_URL, {

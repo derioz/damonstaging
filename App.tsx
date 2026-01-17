@@ -15,7 +15,7 @@ const App: React.FC = () => {
     isProcessing: false,
     selectedStyle: StagingStyle.MODERN,
     selectedRoomType: 'LIVING_ROOM',
-    selectedModel: 'gemini-3-pro-image-preview',
+    selectedModel: 'gemini-2.0-flash-exp',
     error: null,
   });
 
@@ -132,7 +132,7 @@ const App: React.FC = () => {
         isProcessing: false,
         selectedStyle: StagingStyle.MODERN,
         selectedRoomType: 'LIVING_ROOM',
-        selectedModel: 'gemini-3-pro-image-preview',
+        selectedModel: 'gemini-2.0-flash-exp',
         error: null,
       });
       setCurrentViewId('original');
@@ -181,16 +181,16 @@ const App: React.FC = () => {
             {/* Model Switcher */}
             <div className="flex bg-slate-900 rounded-lg p-1 border border-slate-800">
               <button
-                onClick={() => setState(prev => ({ ...prev, selectedModel: 'gemini-2.5-flash-image' }))}
-                className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${state.selectedModel === 'gemini-2.5-flash-image' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
+                onClick={() => setState(prev => ({ ...prev, selectedModel: 'gemini-2.0-flash-exp' }))}
+                className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${state.selectedModel === 'gemini-2.0-flash-exp' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
               >
-                Fast (v2.5)
+                Fast (v2.0 Flash)
               </button>
               <button
-                onClick={() => setState(prev => ({ ...prev, selectedModel: 'gemini-3-pro-image-preview' }))}
-                className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${state.selectedModel === 'gemini-3-pro-image-preview' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
+                onClick={() => setState(prev => ({ ...prev, selectedModel: 'gemini-1.5-pro' }))}
+                className={`px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${state.selectedModel === 'gemini-1.5-pro' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}
               >
-                Quality (v3.0)
+                Quality (v1.5 Pro)
               </button>
             </div>
             <div className="h-8 w-px bg-slate-800" />

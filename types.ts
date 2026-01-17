@@ -35,7 +35,7 @@ export interface UploadedImage {
   timestamp: number;
 }
 
-export type GeminiModel = 'gemini-2.5-flash-image' | 'gemini-3-pro-image-preview';
+export type GeminiModel = 'gemini-2.0-flash-exp' | 'gemini-1.5-pro';
 
 export interface AppState {
   uploadedImages: UploadedImage[];

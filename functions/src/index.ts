@@ -123,7 +123,7 @@ export const stageRoom = onRequest(
             const base64Data = image.split(",")[1] || image;
             const styleConfig = STYLE_CONFIGS[style];
             const roomLabel = ROOM_TYPE_LABELS[roomType] || "a room";
-            const modelName = model || "gemini-2.5-flash-image";
+            const modelName = model || "gemini-2.0-flash-exp";
 
             if (!styleConfig) {
                 res.status(400).json({ error: `Unknown style: ${style}` });
