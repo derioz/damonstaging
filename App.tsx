@@ -206,35 +206,91 @@ const App: React.FC = () => {
 
       <main className="flex-1 container mx-auto px-6 py-12 max-w-7xl">
         {state.uploadedImages.length === 0 ? (
-          <div className="max-w-4xl mx-auto space-y-16 animate-slide-up">
-            <div className="text-center space-y-6">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-bold uppercase tracking-widest border border-indigo-500/20">
-                Next-Gen AI Staging
-              </span>
-              <h2 className="text-5xl md:text-7xl font-black text-white leading-tight">
-                Transform Spaces <br />
-                <span className="text-indigo-500">In Seconds.</span>
+          <div className="max-w-5xl mx-auto animate-slide-up pb-20">
+            {/* Minimal Hero */}
+            <div className="text-center py-16 space-y-8">
+              <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight">
+                Virtual Staging <span className="text-indigo-500">Simplified.</span>
               </h2>
-              <p className="text-xl text-slate-400 max-w-2xl mx-auto font-medium">
-                Damon identifies room architecture and applies hyper-realistic virtual staging to your original listing photos.
+              <p className="text-lg text-slate-400 max-w-xl mx-auto">
+                Turn empty rooms into furnished homes in seconds. Preserves all architectural details.
               </p>
+
+              <div className="max-w-md mx-auto">
+                <FileUploader onUpload={handleUpload} isLoading={state.isProcessing} />
+              </div>
             </div>
 
-            <FileUploader onUpload={handleUpload} isLoading={state.isProcessing} />
+            <div className="grid md:grid-cols-2 gap-12 mt-12">
+              {/* Pro Tips Section */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                  </div>
+                  <h3 className="text-lg font-bold text-white uppercase tracking-wider">Pro Tips for Best Results</h3>
+                </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <FeatureCard
-                title="Zero Overlap"
-                desc="Each new style is applied fresh to your original photo, ensuring perfect consistency."
-              />
-              <FeatureCard
-                title="Design Expert"
-                desc="Damon generates professional interior descriptions for every version created."
-              />
-              <FeatureCard
-                title="Interactive Comparison"
-                desc="Review original vs staged views with our precision slider tool."
-              />
+                <div className="space-y-4">
+                  <div className="flex gap-4 items-start p-4 rounded-2xl bg-slate-900/50 border border-slate-800">
+                    <span className="text-indigo-500 font-bold text-lg">01</span>
+                    <div>
+                      <h4 className="font-bold text-white text-sm">Use Wide Angles</h4>
+                      <p className="text-xs text-slate-400 mt-1">Photos taken from corners showing 2+ walls give the AI better depth perception.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4 items-start p-4 rounded-2xl bg-slate-900/50 border border-slate-800">
+                    <span className="text-indigo-500 font-bold text-lg">02</span>
+                    <div>
+                      <h4 className="font-bold text-white text-sm">Natural Lighting</h4>
+                      <p className="text-xs text-slate-400 mt-1">Bright, daytime photos stage significantly better than dark or flash-lit rooms.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4 items-start p-4 rounded-2xl bg-slate-900/50 border border-slate-800">
+                    <span className="text-indigo-500 font-bold text-lg">03</span>
+                    <div>
+                      <h4 className="font-bold text-white text-sm">Empty is Best</h4>
+                      <p className="text-xs text-slate-400 mt-1">While we can replace furniture, starting with an empty or decluttered room yields the cleanest results.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Supported Styles Preview */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-400">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+                  </div>
+                  <h3 className="text-lg font-bold text-white uppercase tracking-wider">Available Design Styles</h3>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {Object.values(StagingStyle).map((style) => (
+                    <span key={style} className="px-3 py-1.5 rounded-md bg-slate-800 text-slate-400 text-[10px] font-bold uppercase tracking-wider border border-slate-700">
+                      {style}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-8 p-6 rounded-2xl bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border border-indigo-500/20">
+                  <h4 className="font-bold text-white text-sm mb-2">Why Damon?</h4>
+                  <ul className="space-y-2 text-xs text-slate-300">
+                    <li className="flex items-center gap-2">
+                      <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+                      Preserves structural elements (windows, doors, floors)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+                      Professional interior design descriptions
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+                      Secure, client-side processing
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         ) : (
